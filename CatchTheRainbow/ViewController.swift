@@ -118,7 +118,14 @@ class ViewController: UIViewController {
             let alert = UIAlertController(title: "Time's Over.", message: "Do you want play again?", preferredStyle: UIAlertController.Style.alert)
             let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
             let againButton = UIAlertAction(title: "Again", style: UIAlertAction.Style.default) { UIAlertAction in
-                //
+                
+                self.score = 0
+                self.scoreLabel.text = "Score: \(self.score)"
+                self.counter = 10
+                self.timeLabel.text = "Time: \(self.counter)"
+                self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.hideRainbow), userInfo: nil, repeats: true)
+                self.timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.countdown), userInfo: nil, repeats: true)
+                
             }
             
             alert.addAction(okButton)
