@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     
     var score = 0
+    var timer = Timer()
+    var rainbowArray = [UIImageView]()
     
     
     //Define Main.storyboard variables.
@@ -30,6 +32,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         scoreLabel.text = "Score: \(score)"
+        rainbowArray = [rainbow1,rainbow2,rainbow3,rainbow4,rainbow5,rainbow6,rainbow7,rainbow8,rainbow9]
+        hideRainbow()
         
         //Gesture recognizer.
         rainbow1.isUserInteractionEnabled = true
@@ -63,7 +67,10 @@ class ViewController: UIViewController {
         rainbow9.addGestureRecognizer(recognizer9)
         
         
+        //Timers
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideRainbow), userInfo: nil, repeats: true)
         
+
         
         
         
@@ -73,6 +80,20 @@ class ViewController: UIViewController {
         
         score += 1
         scoreLabel.text = "Score: \(score)"
+        
+        
+        
+    }
+    
+    
+    @objc func hideRainbow (){
+        for rainbow in rainbowArray{
+            
+            rainbow.isHidden = true
+            }
+        
+        let randomInteger = Int.random(in: 0...8)
+        rainbowArray[randomInteger].isHidden = false
         
         
         
