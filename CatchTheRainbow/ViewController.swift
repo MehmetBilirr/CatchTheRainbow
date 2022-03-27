@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     var score = 0
     var timer = Timer()
     var rainbowArray = [UIImageView]()
+    var timer1 = Timer()
+    var counter = 10
     
     
     //Define Main.storyboard variables.
@@ -34,6 +36,7 @@ class ViewController: UIViewController {
         scoreLabel.text = "Score: \(score)"
         rainbowArray = [rainbow1,rainbow2,rainbow3,rainbow4,rainbow5,rainbow6,rainbow7,rainbow8,rainbow9]
         hideRainbow()
+        timeLabel.text = "Time: \(counter)"
         
         //Gesture recognizer.
         rainbow1.isUserInteractionEnabled = true
@@ -69,6 +72,7 @@ class ViewController: UIViewController {
         
         //Timers
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideRainbow), userInfo: nil, repeats: true)
+        timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countdown), userInfo: nil, repeats: true)
         
 
         
@@ -85,7 +89,6 @@ class ViewController: UIViewController {
         
     }
     
-    
     @objc func hideRainbow (){
         for rainbow in rainbowArray{
             
@@ -95,10 +98,37 @@ class ViewController: UIViewController {
         let randomInteger = Int.random(in: 0...8)
         rainbowArray[randomInteger].isHidden = false
         
+    
+    }
+    @objc func countdown(){
+        
+        counter -= 1
+        timeLabel.text = "Time: \(counter)"
+        
+        if counter == 0 {
+            
+            scoreLabel.text = "Score: \(score)"
+            timer1.invalidate()
+            timer.invalidate()
+            for rainbow in rainbowArray{
+                
+                rainbow.isHidden = true
+                }
+            
+            let alert = UIAlertController(title: "Time's Over.", message: "Do you want play again?", preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+            let againButton = UIAlertAction(title: "Again", style: UIAlertAction.Style.default) { UIAlertAction in
+                //
+            }
+            
+            alert.addAction(okButton)
+            alert.addAction(againButton)
+            self.present(alert, animated: true)
+            
+        }
         
         
     }
-    
     
     
 
