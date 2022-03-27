@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var score = 0
     
     
     //Define Main.storyboard variables.
@@ -27,8 +28,58 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        scoreLabel.text = "Score: \(score)"
+        
+        //Gesture recognizer.
+        rainbow1.isUserInteractionEnabled = true
+        rainbow2.isUserInteractionEnabled = true
+        rainbow3.isUserInteractionEnabled = true
+        rainbow4.isUserInteractionEnabled = true
+        rainbow5.isUserInteractionEnabled = true
+        rainbow6.isUserInteractionEnabled = true
+        rainbow7.isUserInteractionEnabled = true
+        rainbow8.isUserInteractionEnabled = true
+        rainbow9.isUserInteractionEnabled = true
+        
+        let recognizer1 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer2 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer3 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer4 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer5 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer6 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer7 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer8 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        let recognizer9 = UITapGestureRecognizer(target: self,action: #selector(increaseScore))
+        
+        rainbow1.addGestureRecognizer(recognizer1)
+        rainbow2.addGestureRecognizer(recognizer2)
+        rainbow3.addGestureRecognizer(recognizer3)
+        rainbow4.addGestureRecognizer(recognizer4)
+        rainbow5.addGestureRecognizer(recognizer5)
+        rainbow6.addGestureRecognizer(recognizer6)
+        rainbow7.addGestureRecognizer(recognizer7)
+        rainbow8.addGestureRecognizer(recognizer8)
+        rainbow9.addGestureRecognizer(recognizer9)
+        
+        
+        
+        
+        
+        
     }
+    
+    @objc func increaseScore(){
+        
+        score += 1
+        scoreLabel.text = "Score: \(score)"
+        
+        
+        
+    }
+    
+    
+    
 
 
 }
