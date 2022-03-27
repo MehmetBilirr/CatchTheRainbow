@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var rainbowArray = [UIImageView]()
     var timer1 = Timer()
     var counter = 10
+    var highScore = 0
     
     
     //Define Main.storyboard variables.
@@ -37,6 +38,22 @@ class ViewController: UIViewController {
         rainbowArray = [rainbow1,rainbow2,rainbow3,rainbow4,rainbow5,rainbow6,rainbow7,rainbow8,rainbow9]
         hideRainbow()
         timeLabel.text = "Time: \(counter)"
+        highScoreLabel.text = "Highscore: \(highScore)"
+        
+        let storedScore = UserDefaults.standard.object(forKey: "highscore")
+        
+        if storedScore == nil {
+            highScore = 0
+            highScoreLabel.text = "Highscore: \(highScore)"
+            }
+        
+        if let newScore = storedScore as? Int {
+            
+            highScore = newScore
+            
+            highScoreLabel.text = "Highscore: \(highScore)"
+        }
+        
         
         //Gesture recognizer.
         rainbow1.isUserInteractionEnabled = true
@@ -106,6 +123,14 @@ class ViewController: UIViewController {
         timeLabel.text = "Time: \(counter)"
         
         if counter == 0 {
+            
+            if score > highScore {
+                
+                highScore = score
+                highScoreLabel.text = "Highscore: \(highScore)"
+                UserDefaults.standard.set(self.highScore, forKey: "highscore")
+                
+            }
             
             scoreLabel.text = "Score: \(score)"
             timer1.invalidate()
